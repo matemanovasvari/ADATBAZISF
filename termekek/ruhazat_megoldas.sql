@@ -47,3 +47,29 @@ INSERT INTO `szallitok`(`cegnev`, `szekhely`, `cim`) VALUES
 ("Elegance","Szentes","Kossuth út 18.")	
 
 UPDATE szallitok SET szekhely = "Hódmezővásárhely" WHERE cegnev = "Elegance"
+
+alter table szallitok add irszam varchar(4);
+
+UPDATE szallitok SET irszam = "6900" WHERE szekhely = "Makó";
+UPDATE szallitok SET irszam = "6800" WHERE szekhely = "Hódmezővásárhely";
+
+INSERT INTO `szallitok`(`cegnev`, `szekhely`, `cim`, `irszam`) VALUES ("Blöki kutyakozmetika","Szeged","Budai Nagy Antal u. 2.","6753");
+
+CREATE TABLE vasarlas(
+	cikkszam int,
+    vasarlas_datuma date,
+    mennyiseg SMALLINT,
+    szallitokod int,
+    PRIMARY KEY(cikkszam, vasarlas_datuma)
+);
+
+INSERT INTO `vasarlas`(`cikkszam`, `vasarlas_datuma`, `mennyiseg`, `szallitokod`) VALUES
+(1,'2022-01-25',2,1),
+(8,'2021-11-14',3,2),
+(4,'2022-06-10',4,3),
+(5,'2022-10-01',2,3),
+(6,'2022-07-26',3,3)
+
+DELETE FROM vasarlas WHERE vasarlas_datuma BETWEEN "2022-06-01" AND "2022-07-31;"
+
+UPDATE vasarlas SET mennyiseg = mennyiseg * 2 WHERE cikkszam = 5;
