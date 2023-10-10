@@ -8,3 +8,13 @@ CREATE TABLE bankszamla(
     egyenleg int,
     kiemelt BINARY
 );
+
+ALTER TABLE bankszamla MODIFY valutanem varchar(3);
+
+ALTER TABLE bankszamla ADD bankado SMALLINT;
+
+UPDATE bankszamla SET bankado = egyenleg * 0.0015 WHERE valutanem = "HUF";
+
+ALTER TABLE bankszamla DROP kiemelt;
+
+DELETE FROM bankszamla WHERE valutanem = "USD";
