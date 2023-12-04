@@ -16,22 +16,6 @@ VALUES
 (2,'Balogh Ubul','baloghubulka@hotmail.com','2008-10-02',3),
 (3,'Terhes Iván','terhesivan12@gmail.com','2008-12-12',10);
 
-DROP INDEX szuldatum ON diak;
-vagy
-ALTER TABLE diak DROP INDEX szuldatum;
-
-CREATE UNIQUE INDEX email_idx ON diak(email);
--- megj.: egy mezőre két indexet helyeztünk el - kapunk egy figyelmeztetést
-vagy
-ALTER TABLE diak ADD UNIQUE INDEX email_idx(email);
-
--- nincs szükségünk két indexre egy mezőn, töröljük ki a régebbit
-ALTER TABLE diak DROP INDEX email;
-
-
-ALTER TABLE diak DROP diakAZ;
-ALTER TABLE diak ADD diakID int AUTO_INCREMENT PRIMARY KEY FIRST;
-
 ALTER TABLE diak ADD osztaly varchar(6);
 UPDATE diak SET osztaly = "9.a";
 
@@ -48,4 +32,21 @@ INSERT INTO `osztalyok`(`osztalyAZ`, `osztalyfonok`, `osztalyteremm`) VALUES
 
 ALTER TABLE diak ADD FOREIGN KEY (osztaly) REFERENCES osztalyok(osztalyAZ);
 
+-- nem fut le ez a parancs mert az osztály táblában nincs 10.a osztály
+INSERT INTO `diak`(`diakAZ`, `nev`, `email`, `szuldatum`, `testverszam`, `osztaly`) VALUES 
+('4','Karika Roland','kr@gmail.com','2004-11-07',0,'10.a');
 
+--felvesszük a 10.a osztályt az osztály táblába
+INSERT INTO `osztalyok`(`osztalyAZ`, `osztalyfonok`, `osztalyteremm`) VALUES ('10.a','Hangya Zoltán',3);
+
+--mostmár műkszik
+INSERT INTO `diak`(`diakAZ`, `nev`, `email`, `szuldatum`, `testverszam`, `osztaly`) VALUES 
+('4','Karika Roland','kr@gmail.com','2004-11-07',0,'10.a');
+
+--nevezzük át a 10.a osztályt 10.b-re
+UPDATE osztalyok set osztalyAZ = "10.b" WHERE osztalyAZ = "10.a";
+-- nem fut le mert van kapcsolódó rekord a diak táblában
+-- csak akkor fut le ha az ON UPDATE tulajdonságnál CASCADE értéket adunk meg.
+
+--ha ezt megváltoztatjuk akkor műkszik
+UPDATE osztalyok set osztalyAZ = "10.b" WHERE osztalyAZ = "10.a";
