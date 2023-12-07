@@ -1,0 +1,32 @@
+--1.
+CREATE DATABASE buszrendeles CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+
+--2.
+CREATE TABLE busz
+(
+  sorszam int AUTO_INCREMENT PRIMARY KEY,
+  ferohely tinyint,
+  tipus varchar(60) not null UNIQUE,
+  komfort varchar(40),
+  kmdij SMALLINT not null,
+  oradij SMALLINT not null
+);
+
+CREATE INDEX kmdij_idx ON busz(kmdij);
+
+CREATE TABLE rendeles
+(
+  busz_szam int, 
+  FOREIGN KEY(busz_szam) REFERENCES busz(sorszam),
+  rendelesdatum date not null,
+  megrendelo varchar(50) not null,
+  nap tinyint not null,
+  km_e BINARY
+);
+
+CREATE INDEX rendelesdatum_idx ON rendeles(rendelesdatum)
+
+--3.
+
+
+	
