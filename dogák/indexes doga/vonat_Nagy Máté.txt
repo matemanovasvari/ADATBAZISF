@@ -1,0 +1,49 @@
+CREATE DATABASE vonatjegyvasarlas CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+
+CREATE TABLE jaratok(
+    jaratID int AUTO_INCREMENT PRIMARY KEY,
+    honnan varchar(40) NOT null ,
+    hova varchar(40) NOT null,
+    km SMALLINT,
+    INDEX(honnan)
+);
+
+CREATE TABLE jegyfoglalas(
+    foglalasID int AUTO_INCREMENT PRIMARY KEY,
+    jaratID int,
+    datum date NOT null,
+    darabszam SMALLINT NOT null,
+    megrendeloemail varchar(60) NOT null UNIQUE,
+    osztaly BINARY,
+    FOREIGN KEY(jaratID) REFERENCES jaratok(jaratID)
+);
+
+INSERT INTO jaratok
+(honnan, hova, km) VALUES
+('Szeged','Budapest',191),
+('Szeged','Békéscsaba',97),
+('Budapest-Kelenföld','Győr',127),
+('Szombathely','Pécs',250);
+
+INSERT INTO jegyfoglalas
+(jaratID, datum, darabszam, megrendeloemail, osztaly) VALUES
+(1,'2023-12-08',1,'joomarton@gmail.com',1),
+(2,'2023-12-20',3,'vargaszabi@vipmail.hu',0),
+(4,'2023-12-15',1,'harmath.krisztina@gmail.com',0),
+(2,'2023-12-08',6,'kalapos.terez120@gmail.com',0),
+(3,'2023-12-28',2,'zoltan.galambos@freemail.hu',1);
+
+ALTER TABLE jaratok DROP INDEX honnan;
+CREATE INDEX hova_idx ON jaratok(hova);
+
+UPDATE jegyfoglalas SET darabszam=darabszam/2 AND osztaly = 1 WHERE datum="2023-12-08" AND jaratID=2;
+
+ALTER TABLE jegyfoglalas MODIFY darabszam tinyint;
+
+UPDATE jaratok SET hova = "Budapest-Nyugati" WHERE honnan = "Szeged" AND hova = "Budapest";
+
+ALTER TABLE jaratok ADD kmar int;
+
+UPDATE jaratok SET kmar=km*19.4;
+
+DELETE FROM jegyfoglalas WHERE datum = "2020-12-16" OR datum = "2023-12-31";
