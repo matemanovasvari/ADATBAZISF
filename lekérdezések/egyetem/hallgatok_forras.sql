@@ -245,3 +245,14 @@ FROM hallgatok
 SELECT COUNT(DISTINCT szaktipus) AS kulonbozoSzaktipusokSzama
 FROM hallgatok;
 
+SELECT COUNT(tanuloID) AS tanulokSzama
+FROM hallgatok;
+
+SELECT tanuloNev, feleviAtlag, feleviAtlag * 1.15 AS tervezettEvvegiAtlag
+FROM hallgatok;
+
+SELECT tanuloNev, evvegiAtlag
+FROM hallgatok
+WHERE evvegiAtlag - 1 > (SELECT AVG(evvegiAtlag) FROM hallgatok)
+ORDER BY evvegiAtlag DESC;
+
