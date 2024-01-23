@@ -1,4 +1,4 @@
-CREATE TABLE `autofogyasztas` (
+-CREATE TABLE `autofogyasztas` (
   `autotipus` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `kombinalt_fogyasztas` float NOT NULL,
   `varosi_fogyasztas` float NOT NULL,
@@ -49,17 +49,17 @@ FROM autofogyasztas
 
 6. Listázza az autók típusát, kombinált fogyasztását 100 km-en és azt, hogy egy 450 km-es út megtétele mennyibe kerülne, ha a benzin ára 350 Ft/liter. A számításhoz a kombinált fogyasztás adatát használja! A végeredményt rendezze fizetett összeg szerint!
 
-SELECT autotipus, kombinalt_fogyasztas, kombinalt_fogyasztas * 350 * 4.5 AS ut_ara
+SELECT autotipus, kombinalt_fogyasztas, kombinalt_fogyasztas * 350 * 4.5 AS benzin_ara
 FROM autofogyasztas
-ORDER BY ut_ara
+ORDER BY benzin_ara
 
 7. Adja meg minden autónál, hogy az országúti fogyasztás hány százaléka a városi fogyasztásnak! A listában az autó típusa és a kiszámolt százalékérték szerepeljen autótípus szerinti ábécé sorrendben!
 
-SELECT autotipus,  orszaguti_fogyasztas / varosi_fogyasztas * 100
+SELECT autotipus,  orszaguti_fogyasztas / varosi_fogyasztas * 100 AS szazalek
 FROM autofogyasztas
 ORDER BY autotipus
 
 8. Adja meg milyen két határérték között ingadozik az autók városi fogyasztása!
 
-SELECT MIN(varosi_fogyasztas) AS minimum_hatarertek, MAX(varosi_fogyasztas) AS maximum_hatarertek
+SELECT MIN(varosi_fogyasztas) AS minimum_fogyasztas, MAX(varosi_fogyasztas) AS maximum_fagyasztás
 FROM autofogyasztas;
