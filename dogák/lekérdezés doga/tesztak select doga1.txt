@@ -1,0 +1,63 @@
+Feladatok:
+
+1. Készítsen "tesztagyar" néven egy adatbázist, amely utf8 kódolású és a magyar ékezetes karaktereket használja!
+Az utasítást másolja ide!
+
+CREATE DATABASE tesztagyar CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+
+2. Importálja az "tesztak" táblát az adatokkal együtt! Használja az tesztak_forras.sql fájl tartalmát!
+(A táblázat egy tésztaüzemben gyártott tésztafélék adatait tartalmazza: név, kiszerelés(g), ár és kategória.)
+
+Készítse el az alábbi lekérdezéseket és másolja ebbe a fájlba a megfelelõ feladatszám alá!
+A számított mezõknek adjon értelemszerû alias-nevet!
+
+3. Készítsen lekérdezést, amely megadja, hogy átlagosan mennyibe kerül egy csomag tészta? 
+(A kiszerelést nem vesszük figyelembe.)
+
+SELECT AVG(ar)
+FROM tesztak;
+
+
+4. Minden tésztaféle esetén számítsa ki, hogy mennyibe kerül 10dkg!
+A kiszerelés a tésztacsomag grammban kifejezett súlyát jelenti.
+Rendezze a listát úgy, hogy a 10dkg-os ár alapján a legdrágább termékek legyenek elöl
+
+SELECT DISTINCT kategoria, ar * 10 AS tizdgk_teszta_ara
+FROM tesztak
+ORDER BY tizdgk_teszta_ara DESC;
+
+5. Hányféle tésztakategória van?
+
+SELECT COUNT(DISTINCT kategoria) AS tesztafelek_szama
+FROM tesztak;
+
+6. Melyik a 16 legolcsóbb termék?
+
+SELECT nev, ar
+FROM tesztak
+ORDER BY ar LIMIT 16;
+
+7. Jelenítse meg azt a két értéket, amelyek között ingadoznak a tésztaárak!
+
+SELECT MIN(ar) AS legalacsonyabb_ar, MAX(ar) AS legmagasabb_ar
+FROM tesztak;
+
+
+8. Listázza az összes termék nevét, kiszerelését, árát és kategóriáját!
+Rendezze a listát kategória szerint növekvõ, azonos kategória esetén terméknév szerint csökkenõ sorrendbe!
+
+SELECT nev, kiszereles, ar, kategoria
+FROM tesztak
+ORDER BY kategoria, nev DESC
+
+9. A következõ hónapban minden terméket leáraznak 12%-kal. Listázza a termékek nevét, eredeti és engedményes árát! Az árak "eredetiAr" és "engedmenyesAr" néven jelenjenek meg!
+
+SELECT nev, ar AS eredetiAr, ar - (ar * 0.12) AS engedmenyesAr
+FROM tesztak;
+
+
+
+
+
+
+
