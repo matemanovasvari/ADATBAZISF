@@ -1,0 +1,55 @@
+1.      A szakmunkás végzettségű férfi dolgozók alapbérét megemelik 28%-kal. Listázza a dolgozók nevét, alapbérét és az emelt alapbért!
+A listát rendezze emelt bér szerint csökkenő sorrendbe!
+
+SELECT nev, alapber, alapber * 1.28 AS emelt_Alapber
+FROM dolgozok
+WHERE vegzettseg = "szakmunkás" AND ferfi = true
+ORDER BY emelt_Alapber DESC;
+
+2.      Kik laknak az Avar utcában? A név és a lakcím jelenjen meg! (Több településen is lehet Avar utca.)
+
+SELECT nev, lakcim
+FROM dolgozok
+WHERE lakcim LIKE "%Avar u.%"
+
+3.      Hány nő alkalmazott dolgozik a marketing részlegen?
+
+SELECT COUNT(*) AS marketingesNokSzama
+FROM dolgozok
+WHERE reszleg = "marketing"  AND ferfi = false;
+
+4.      Keresünk egy dolgozót, aki Gazdaghely településen él és Mária a keresztneve. Ki lehet? A listában szerepeljen a dolgozó neve, lakcíme és születési ideje!
+
+SELECT nev, lakcim, szulido
+FROM dolgozok
+WHERE lakcim LIKE "Gazdaghely%" AND nev LIKE "%Mária";
+
+5.      Kik azok az 1978-as születésű dolgozók, akik bére legalább 250 000 Ft? A listában szerepeljen a dolgozó neve, születési ideje és bére úgy, hogy a legfiatalabb dolgozó legyen elöl!
+
+SELECT nev, lakcim, alapber
+FROM dolgozok
+WHERE Year(szulido) = 1978 AND alapber >= 250000
+ORDER BY szulido DESC
+
+6.      Hány évesen léptek be a céghez a 8 általános illetve a szakmunkás végzettségűek? A listában szerepeljen a dolgozó neve, életkora a belépéskor és végzettsége névsorrendben!
+
+
+
+7.      Mekkora azon dolgozók átlagkeresete, akik nem a „pénzügy” osztályon dolgoznak?
+
+8.      A 20 éves munkaviszonyt díjazzák, mégpedig az alapbér 2-szeresét kapják a dolgozók elismerésképp. Listázza név szerint azokat a dolgozókat, akik az idén kapnak jubileumi jutalmat! A jutalom összege is jelenjen meg!
+
+9.      Kik azok a dolgozók, akik július 17-én születtek és hány évesek ma?
+
+10.  Keresünk egy dolgozót, aki a logisztika vagy a karbantartás részlegen dolgozik és B betűvel kezdődik a neve? Készítsen lekérdezést, amely listázza a lehetséges dolgozók nevét és a részleget, ahol dolgozik! Rendezze a listát részleg, azonos részleg esetén névsorrendbe!
+
+11.  Kik azok a márciusi születésű dolgozók, akik 2000 és 2005 között léptek be a céghez? A dolgozó neve, születési ideje és belépésének dátuma jelenjen meg úgy, hogy a legidősebb dolgozó neve legyen elöl!
+
+12.  Ki a 15 legjobban fizetett dolgozó az értékesítés osztályon és mennyit keres?
+
+13.  Összesen mennyi bért fizetnek ki egy hónapban az OKJ-s szakmával rendelkező dolgozóknak?
+
+14.  Kik azok a végvári lakosok, akiknek a fizetése nem éri el a 190 000 Ft-ot? A nevük mellett az alapbérük és a lakcímük is jelenjen meg!
+
+15.  Az értékesítés, a logisztika és a pénzügy részleg kivételével minden más részlegen dolgozókat kényszerszabadságra küldenek két hétre. Mely részlegeken dolgozók lesznek kényszerszabadságon? Minden részleg neve csak egyszer jelenjen meg!
+

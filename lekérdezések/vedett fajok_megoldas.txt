@@ -1,0 +1,20 @@
+Készítse el az alábbi lekérdezéseket!
+
+1. - Melyek azok a baglyok, amelyek eszmei értéke 100 000 Ft?
+1. -Hány madár található az adatbázisban?
+1. -Melyek azok a hüllők, amelyeket 1974-ben nyilvánítottak fokozottan védetté?
+1. -Mennyi az összértéke az 1901-ben fokozottan védetté nyilvánított emlősöknek?
+1. -Mekkora az eszmei értéke a parlagi sasnak és a szirti sasnak?
+1. -Milyen denevérek védettek, mikor váltak fokozottan védetté és mekkora az eszmei értékük?
+1. - Listázza az összes ízeltlábú és puhatestű védett állatot!
+1. - Keresse meg az összes olyan állatot, melynek nevében szerepel a „fekete” vagy a „fehér” szó és listázza nevüket és eszmei értéküket!
+1. - Hány állatot nyilvánítottak fokozottan védetté 1906-ban?
+1. - Melyek azok az állatok, amelyek eszmei értéke 1 000 000 Ft? A listát rendezze az állat neve szerint növekvő sorrendbe!
+1. - Melyek azok az állatkategóriák, amelyek között van 1000000 Ft eszmei értékű állat?
+
+
+Készítse el az alábbi lekérdezéseket, amelyek már csoportosítást is tartalmaznak!
+
+Mekkora a puhatestűek és kétéltűek összes eszmei értéke?
+Hány védett állatot tartanak nyilván az egyes kategóriákban? Melyek azok a kategóriák, amelyekbe legfeljebb 5 védett állatot soroltak?
+Az egyes években hány állatot nyilvánítottak védetté?

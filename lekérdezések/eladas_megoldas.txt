@@ -1,0 +1,23 @@
+Feltételek két táblára
+
+1.    Listázza azon áruk nevét, eladás dátumát és eladott mennyiségét, amelyekből legalább 5 egységet adtak el! Rendezze az eredményt úgy, hogy a legfrissebb dátum legyen elöl!
+
+SELECT aru.Arunev, eladas.datum, eladas.mennyiseg
+FROM aru, eladas
+WHERE aru.Arukod = eladas.arukod AND eladas.mennyiseg >= 5
+ORDER BY eladas.datum DESC
+
+2.    Hány darabot adtak el konyakos mennyből?
+
+SELECT SUM(eladas.mennyiseg) AS összeladas
+FROM aru, eladas
+WHERE aru.Arukod = eladas.arukod AND aru.Arunev = "konyakos meggy"
+
+3.    Listázza, hogy a 2013. májusi eladások után az egyes termékekből mennyi maradt raktáron! A raktárkészlet szerint rendezze a listát!
+
+4.    Összesen hány nem engedményes tejterméket adtak el? Tejtermék a tej, sajt és túró.
+
+5.    Összesen mekkora értéket árultak ki 2013. május második felében?
+
+6.    Listázza a nem „kg” egységű termékek eladásának adatait: árunév, egység, eladott mennyiség, egységár, fizetett összeg, eladás dátuma!
+
