@@ -1,0 +1,59 @@
+Készítse el az alábbi lekérdezéseket!
+
+1. - Melyek azok a baglyok, amelyek eszmei értéke 100 000 Ft?
+
+SELECT allat.nev
+FROM allat, ertek
+where allat.ertekid = ertek.id AND allat.nev LIKE "%bagyoly" AND ertek.forint = 100000
+
+2. - Hány madár található az adatbázisban?
+
+SELECT COUNT(*) AS madarakSzama
+FROM allat, kategoria
+where allat.katid = kategoria.id AND kategoria.nev = "madarak"
+
+3. - Melyek azok a hüllők, amelyeket 1974-ben nyilvánítottak fokozottan védetté?
+
+SELECT allat.nev
+FROM kategoria, allat
+where kategoria.id = allat.katid AND kategoria.nev = "hüllők" AND allat.ev = 1974;
+
+4. - Mennyi az összértéke az 1901-ben fokozottan védetté nyilvánított emlősöknek?
+
+SELECT SUM(ertek.forint) AS osszertek
+FROM kategoria, allat, ertek
+where kategoria.id = allat.katid AND allat.ertekid = ertek.id AND kategoria.nev = "emlősök" AND allat.ev = 1901
+
+5. - Mekkora az eszmei értéke a parlagi sasnak és a szirti sasnak?
+
+SELECT ertek.forint, allat.nev
+FROM allat, ertek
+WHERE allat.ertekid = ertek.id AND (allat.nev = "parlagi sas" OR allat.nev = "szirti sas")
+
+6. - Milyen denevérek védettek, mikor váltak fokozottan védetté és mekkora az eszmei értékük?
+
+7. - Listázza az összes ízeltlábú és puhatestű védett állatot!
+
+8. - Keresse meg az összes olyan állatot, melynek nevében szerepel a „fekete” vagy a „fehér” szó és listázza nevüket és eszmei értéküket!
+
+9. - Hány állatot nyilvánítottak fokozottan védetté 1906-ban?
+
+SELECT COUNT(*) AS darab
+FROM allat
+WHERE allat.nev = 1906
+
+10. - Melyek azok az állatok, amelyek eszmei értéke 1 000 000 Ft? A listát rendezze az állat neve szerint növekvő sorrendbe!
+
+11. - Melyek azok az állatkategóriák, amelyek között van 1000000 Ft eszmei értékű állat?
+
+
+Készítse el az alábbi lekérdezéseket, amelyek már csoportosítást is tartalmaznak!
+
+
+1. - Mekkora a puhatestűek és kétéltűek összes eszmei értéke?
+
+2. - Hány védett állatot tartanak nyilván az egyes kategóriákban? 
+
+3. - Melyek azok a kategóriák, amelyekbe legfeljebb 5 védett állatot soroltak?
+
+4. - Az egyes években hány állatot nyilvánítottak védetté?
