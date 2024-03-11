@@ -1,0 +1,43 @@
+1. CREATE DATABASE utazas CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+
+4. Hány olyan 3-csillagos szállodát kínál az utazási iroda, ahol félpanziós ellátás van?
+
+SELECT COUNT(*)
+FROM szalloda
+WHERE szalloda.besorolas = 3 AND szalloda.felpanzio
+
+5. Ha Egyiptomba szeretnénk utazni, akkor milyen helységekben találunk 4 illetve 5 csillagos szállodát és mi a szálloda neve? A mezők „telepules” és „szallodanev” feliratokkal jelenjenek meg!
+
+SELECT helyseg.nev AS település, szalloda.nev AS szallodanev
+FROM szalloda, helyseg
+WHERE helyseg.az = szalloda.helyseg_az AND (szalloda.besorolas = 4 OR szalloda.besorolas = 5) AND helyseg.orszag = "egyiptom"
+
+6. Egy család 2022. februárjában szeretne utazni. Ebben az időszakban átlagosan mennyibe kerül egy 15 napos szállás?
+
+SELECT AVG(tavasz.ar)
+FROM tavasz
+WHERE tavasz.indulas LIKE 2022-02-%" AND tavasz.idotartam = 15;
+
+7. Legtöbben a tunéziai utak iránt érdeklődnek. Készítsen lekérdezést, ami a tunéziai szállodák nevét, az indulás dátumát és az árat jeleníti meg, de csak azokat, amelyek nem közvetlenül a tengerparton vannak!
+
+SELECT szalloda.nev, tavasz.indulas, tavasz.ar
+FROM helyseg, szalloda, tavasz
+WHERE (helyseg.az = szalloda.helyseg_az AND szalloda.az = tavasz.szalloda_az) AND helyseg.orszag = "tunézia" AND szalloda.tengerpart_tav > 0 	
+
+8. Olyan szállodába szeretnénk menni, amelynek a reptértől való távolsága legfeljebb 15. Hány ilyen utat kínál az utazási iroda?
+
+SELECT COUNT(*)
+FROM `szalloda`
+WHERE szalloda.repter_tav <= 15;
+
+9. Egy házaspár bármely hónap 20-a után tud csak elutazni. Arra emlékeztek, hogy a szálloda neve, amit kinéztek, C-betűvel kezdődik. Készítsen listát számukra, amely a feltételeknek megfelel! A listában az ország neve, a település neve, a szálloda neve, az indulás dátuma és az ár szerepeljen!
+
+SELECT helyseg.orszag, helyseg.nev, szalloda.nev, tavasz.indulas, tavasz.ar
+FROM helyseg, szalloda, tavasz
+WHERE (helyseg.az = szalloda.helyseg_az AND szalloda.az = tavasz.szalloda_az) AND szalloda.nev LIKE "c%" AND tavasz.indulas LIKE "2022-%-2%"
+
+10. Egy utas az utazási iroda prospektusát olvasta. Sajnos csak arra emlékezett, hogy az általa kiválasztott szálloda nevében szerepelt a Palace szó. Készítsen listát, hogy melyik országban, mely településen találhatók ilyen nevű szállodák! A lekérdezés eredményében legyen a helység neve „telepules”, a szálloda neve „szalloda” mezőnévvel jelenjen meg!
+
+SELECT helyseg.orszag, helyseg.nev AS telepules, szalloda.nev AS szalloda
+FROM helyseg, szalloda
+WHERE (helyseg.az = szalloda.helyseg_az) AND szalloda.nev LIKE "%palace%";
