@@ -1,0 +1,23 @@
+
+1. Listázza Franciaország városait és azt, hogy a város lakosainak száma hány %-a az ország népességének! Rendezze úgy a listát, hogy a legnépesebb város neve legyen elöl!
+
+
+
+2. Hány országban hivatalos nyelv az angol?
+
+
+
+3. Milyen nyelveket beszélnek Andorrában és azok hivatalos nyelvek-e?
+
+
+
+4. készítsen listát az amerikai földrész országairól, amelyben az ország neve mellett megjelenik a fővárosa, a hivatalos nyelv és a népsűrűség országnév szerinti ábécé sorrendben!
+
+
+
+5. Milyen V-betűvel kezdődő, pontosan 5-betűs városok vannak és mely országokban találhatók?
+
+
+
+
+
