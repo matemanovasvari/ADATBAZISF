@@ -1,15 +1,22 @@
 
 1. Listázza Franciaország városait és azt, hogy a város lakosainak száma hány %-a az ország népességének! Rendezze úgy a listát, hogy a legnépesebb város neve legyen elöl!
 
-
+SELECT varosok.varosnev, varosok.varoslakossag * 1000 / orszagok.nepesseg * 100 AS varoslakossag_aranya
+FROM varosok INNER JOIN orszagok ON varosok.orszagkod = orszagok.orszagkod
+WHERE orszagok.orszagnev = "Franciaország" 
+ORDER BY varosok.varoslakossag DESC;
 
 2. Hány országban hivatalos nyelv az angol?
 
-
+SELECT COUNT(*)
+FROM nyelvek INNER JOIN hasznalt_nyelvek ON nyelvek.nyelvkod = hasznalt_nyelvek.nyelvkod
+WHERE nyelvek.nyelv = "angol" AND hasznalt_nyelvek.hivatalos_e = "igen";
 
 3. Milyen nyelveket beszélnek Andorrában és azok hivatalos nyelvek-e?
 
-
+SELECT nyelvek.nyelv, hasznalt_nyelvek.hivatalos_e
+FROM nyelvek INNER JOIN hasznalt_nyelvek ON nyelvek.nyelvkod = hasznalt_nyelvek.nyelvkod INNER JOIN orszagok ON orszagok.orszagkod = hasznalt_nyelvek.orszagkod
+WHERE orszagok.orszagnev = "Andorra"
 
 4. készítsen listát az amerikai földrész országairól, amelyben az ország neve mellett megjelenik a fővárosa, a hivatalos nyelv és a népsűrűség országnév szerinti ábécé sorrendben!
 
@@ -17,7 +24,7 @@
 
 5. Milyen V-betűvel kezdődő, pontosan 5-betűs városok vannak és mely országokban találhatók?
 
-
-
-
+SELECT varosok.varosnev, orszagok.orszagnev
+FROM varosok INNER JOIN orszagok ON varosok.orszagkod = orszagok.orszagkod
+WHERE varosok.varosnev LIKE "v____";
 
