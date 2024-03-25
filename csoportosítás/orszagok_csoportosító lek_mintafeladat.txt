@@ -1,0 +1,59 @@
+-- 1. Számoljuk meg, hány ország van az egyes földrészeken!
+-- Rendezze a listát úgy, hogy a legtöbb országot magába foglaló földrész legyen elöl!
+
+SELECT Foldresz, COUNT(*) AS orszagok_szama
+FROM orszagok
+GROUP BY Foldresz
+ORDER BY orszagok_szama DESC;
+
+-- 2. Mekkora a földrészek területe?
+
+SELECT Foldresz, SUM(Terulet)
+FROM orszagok
+GROUP BY Foldresz;
+
+-- 3. Földrészenként, azon belül államformánként listázzuk ki az országok számát!
+
+SELECT Foldresz, Allamforma, COUNT(*)
+FROM orszagok
+GROUP BY Foldresz, Allamforma;
+
+-- 4. Melyek azok a pénznemek, amelyeket legalább 3 országban használnak?
+-- A pénznem mellett az országok száma is jelenjen meg!
+
+SELECT Penznem, COUNT(*) AS orszagokSzama
+FROM orszagok
+GROUP BY Penznem
+HAVING orszagokSzama >= 3;
+
+-- 5. Hány országban használják a forint, a frank és a dollár pénznemeket?
+
+SELECT Penznem, COUNT(*) AS orszagokSzama
+FROM orszagok
+WHERE Penznem = "forint" OR Penznem = "frank" OR Penznem = "dollár"
+GROUP BY Penznem;
+
+--vagy
+
+SELECT Penznem, COUNT(*) AS orszagokSzama
+FROM orszagok
+GROUP BY Penznem
+HAVING Penznem IN ("forint", "frank", "dollár");
+
+-- 6. Az európai országokban milyen pénznemeket használnak és azokat hány országban használják?
+
+SELECT Penznem, COUNT(*) AS orszagokSzama
+FROM orszagok
+WHERE Foldresz = "európa"
+GROUP BY Penznem
+
+-- 7. Módosítsuk az előző lekérdezést úgy, hogy csak azok a pénznemek jelenjenek meg, amelyeket legalább 3 országban használnak!
+
+SELECT Penznem, COUNT(*) AS orszagokSzama
+FROM orszagok
+WHERE Foldresz = "európa"
+GROUP BY Penznem
+HAVING orszagokSzama >= 3;
+
+
+
