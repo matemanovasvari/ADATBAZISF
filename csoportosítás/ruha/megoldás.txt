@@ -1,0 +1,79 @@
+1. - Hányféle akciós, illetve nem akciós termék van?
+
+SELECT akcios_e, COUNT(*) AS termekkSzam
+FROM termekek
+GROUP BY akcios_e;
+
+2. - Hány akciós, illetve nem akciós termék van összesen raktáron?
+
+SELECT akcios_e, SUM(raktarkeszlet) AS osszRaktarkeszlet
+FROM termekek
+GROUP BY akcios_e;
+
+3. - A kék, a piros és a krém színű termékeknek mekkora az átlagára? Rendezze a listát átlagár szerint csökkenőbe!
+
+
+
+4. - Melyek azok a méretek, amelyek átlagos raktárkészlet-értéke 25 000 Ft feletti?
+
+SELECT meret, AVG(ar * raktarkeszlet) AS atlagosRKertek
+FROM termekek
+GROUP BY meret
+HAVING atlagosRKertek > 25000;
+
+5. - A sárga és a fekete színű termékekből méret szerint összesen hány darab van raktáron?
+
+SELECT meret, SUM(raktarkeszlet) AS osszkeszlet
+FROM termekek
+WHERE szin IN ("sárga", "fekete")
+GROUP BY meret
+
+6. - Mekkora a legmagasabb árú termék ára az egyes kategóriákban?
+
+
+
+7. - Méret, azon belül szín szerint csoportosítva a termékeket, összesen hány darab van belőlük raktáron?
+
+SELECT meret, szin, SUM(raktarkeszlet) AS osszkeszlet
+FROM termekek
+GROUP BY meret, szin;
+
+8. - Az egyes kategóriákba tartozó termékeket csoportosítsuk akció szerint is és mondjuk meg ezen termékek minimális árát!
+
+SELECT kategoriak.kategorianev, termekek.akcios_e, MIN(ar) AS minimumAr
+FROM termekek INNER JOIN kategoriak ON termekek.kategoriakod = kategoriak.kategoriakod
+GROUP BY kategoriak.kategorianev, termekek.akcios_e;
+
+9. - Mekkora az átlagára a különbözőféle topoknak? Az egyes kategóriákra külön számítsuk ki az átlagárat!
+
+SELECT kategoriak.kategorianev, AVG(termekek.ar) AS atlagar
+FROM termekek INNER JOIN kategoriak ON termekek.kategoriakod = kategoriak.kategoriakod
+GROUP BY kategoriak.kategorianev
+HAVING kategoriak.kategorianev LIKE "%top";
+
+10. - Hányféle terméket szereztek be az egyes napokon?
+
+SELECT termekek.beszerzes_datuma, COUNT(*) AS termekfajtakSzama
+FROM termekek
+GROUP BY termekek.beszerzes_datuma;
+
+11. - Az előző lekérdezést alakítsuk át úgy, hogy éves, illetve havi bontásban jelenjen meg a beszerzett termékfajták száma!
+
+SELECT Year(beszerzes_datuma) AS ev, MONTH(beszerzes_datuma) AS honap, COUNT(*) AS termekfajtakSzama
+FROM termekek
+GROUP BY Year(beszerzes_datuma), MONTH(beszerzes_datuma);
+
+12. - Kategória, majd méret szerint csoportosítva a termékeket, listázzuk ki, hogy nem akciós termékeknél mekkora az összes raktárkészlet-érték!
+
+SELECT kategoriak.kategorianev, meret, ar * raktarkeszlet AS osszRaktarkeszletErtek
+FROM termekek INNER JOIN kategoriak ON termekek.kategoriakod = kategoriak.kategoriakod
+WHERE termekek.akcios_e = 0
+GROUP BY kategoriak.kategorianev, meret;
+
+13. - Az 5 000 Ft feletti árú termékeknél méret, majd szín szerint adjuk meg a termékek átlagárát!
+
+
+
+14. - A különböző nadrágokból hányféle akciós és nem akciós termék van?
+
+
