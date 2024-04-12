@@ -49,11 +49,14 @@ GROUP BY Penznem
 
 -- 7. Módosítsuk az előző lekérdezést úgy, hogy csak azok a pénznemek jelenjenek meg, amelyeket legalább 3 országban használnak!
 
-SELECT Penznem, COUNT(*) AS orszagokSzama
+SELECT Penznem
 FROM orszagok
 WHERE Foldresz = "európa"
 GROUP BY Penznem
-HAVING orszagokSzama >= 3;
+HAVING COUNT(*) >= 3;
 
+-- 8. A különböző földrészeken milyen törvényhozó testületek működnek és átlagosan hány ember dolgozik a testületekben?
 
-
+SELECT Foldresz, Torvenyhozastipus, AVG(Torvenyhozasi_letszam) AS atlagos_torv_letszam
+FROM orszagok
+GROUP BY Foldresz, Torvenyhozastipus

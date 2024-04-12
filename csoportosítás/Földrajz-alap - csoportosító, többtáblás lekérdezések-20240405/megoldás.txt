@@ -1,0 +1,47 @@
+1.	Adja meg, hogy mekkora az egyes földrészek összterülete! Rendezze a listát úgy, hogy a legnagyobb összterületű földrész neve legyen elöl!
+
+SELECT foldresz, SUM(terulet) AS osszterulet
+FROM orszagok 
+GROUP BY foldresz
+ORDER BY osszterulet DESC;
+
+2.	Svájcban mely nyelveket beszélik és ezek közül melyik hivatalos nyelv?
+
+SELECT nyelvek.nyelv, hasznalt_nyelvek.hivatalos_e
+FROM nyelvek INNER JOIN hasznalt_nyelvek ON nyelvek.nyelvkod = hasznalt_nyelvek.nyelvkod 
+INNER JOIN orszagok ON hasznalt_nyelvek.orszagkod = orszagok.orszagkod
+WHERE orszagok.orszagnev = "Svájc";
+
+
+3.	Adja meg, hogy hány országban fizetnek frankkal, dollárral illetve peso-val!
+
+SELECT penznem, COUNT(*) AS orszagokSzama
+FROM orszagok
+WHERE penznem IN ("dollár", "frank", "peso")
+GROUP BY penznem;
+
+4.	Listázza, hogy milyen városok vannak Olaszországban és mekkora azok lakossága Rendezze a listát városlakosság szerint!
+
+
+
+5.	A különböző államformájú országok közül mekkora a legnagyobb GDP-érték? Csak azok az államformák jelenjenek meg, ahol ez a maximális GDP-érték meghaladja az 1000 (milliárd USD)-t!
+
+
+
+6.	Keresünk egy olaszországi várost, de csak arra emlékszünk, hogy B-betűvel kezdődik. Mely városokról lehet szó és a lakossága hány %-a olaszország népességének?
+
+
+
+7.	Listázza földrészenként a munkanélküliek összlétszámát! A munkanélküliek száma a népesség adott százaléka. Ezt a százalékot a „munkanelkuliseg” mezőben találja.
+
+
+
+8.	Melyek azok a nyelvek, amelyeket legalább 2 országban használnak hivatalos nyelvként? A listában szerepeljen a hivatalos nyelvek száma is!
+
+
+
+9.	Az európai illetve amerikai országokban mekkora a munkanélküliek száma? A listát rendezze földrész szerint, azonos földrész esetén az az ország legyen elöl, ahol a legnagyobb a munkanélküliség!
+
+
+
+10.	Hány országban beszélik a spanyol, az angol, illetve a német nyelvet?

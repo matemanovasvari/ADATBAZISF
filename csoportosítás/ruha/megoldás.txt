@@ -72,8 +72,16 @@ GROUP BY kategoriak.kategorianev, meret;
 
 13. - Az 5 000 Ft feletti árú termékeknél méret, majd szín szerint adjuk meg a termékek átlagárát!
 
-
+SELECT meret, szin, AVG(ar) AS atlagar
+FROM termekek
+WHERE ar  > 5000
+GROUP BY meret, szin;
 
 14. - A különböző nadrágokból hányféle akciós és nem akciós termék van?
+
+SELECT kategoriak.kategorianev, termekek.akcios_e, COUNT(*) AS termekfajtaSzama
+FROM termekek INNER JOIN kategoriak ON termekek.kategoriakod = kategoriak.kategoriakod
+GROUP BY kategoriak.kategorianev, termekek.akcios_e
+HAVING termekek.termeknev LIKE "%nadrág"
 
 
