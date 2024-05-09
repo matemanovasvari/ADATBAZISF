@@ -1,0 +1,69 @@
+ALTER TABLE feladat ADD FOREIGN KEY (filmid) REFERENCES film(id);
+ALTER TABLE feladat ADD FOREIGN KEY (szemelyid) REFERENCES szemely(id);
+
+1.	Kik azok a személyek, akiknek van szerepe?
+
+SELECT DISTINCT szemely.nev
+FROM szemely INNER JOIN feladat ON szemely.id = feladat.szemelyid
+ORDER BY szemely.nev;
+
+2.	Listázzuk a személyeket és szerepeiket! Minden személy legyen a listában!
+
+SELECT DISTINCT szemely.nev, feladat.megnevezes
+FROM szemely LEFT JOIN feladat ON szemely.id = feladat.szemelyid
+ORDER BY szemely.nev;
+
+3.	Kik azok a személyek, akiknek nincs funkciója? (kétféle megoldással)
+
+SELECT szemely.nev
+FROM szemely LEFT JOIN feladat ON szemely.id = feladat.szemelyid
+WHERE feladat.megnevezes IS null
+ORDER BY szemely.nev;
+
+máshogy: (allekérdezés) - nagyobb időigényű
+
+SELECT nev
+FROM szemely
+WHERE nev NOT IN (SELECT DISTINCT szemely.nev
+				  FROM szemely INNER JOIN feladat ON szemely.id = feladat.szemelyid)
+
+
+4.	Van-e olyan film, amelyhez még nincs szereposztás rendelve?
+
+SELECT film.cim
+FROM feladat RIGHT JOIN film ON film.id = feladat.filmid
+WHERE feladat.megnevezes IS null;
+
+5.	Írassuk ki, az 1940 után gyártott filmek nevét és a benne szereplő színészek számát! (A listában lehet olyan film, amelyhez még nem rögzítettek színészt.)
+
+SELECT film.cim, COUNT(feladat.id) AS szineszekSzama
+FROM feladat RIGHT JOIN film ON film.id = feladat.filmid
+WHERE (feladat.megnevezes = "színész" OR feladat.megnevezes IS null) AND film.gyartas > 1940
+GROUP BY film.cim;
+
+6.	Listázzuk a művészek nevét és szerepét, akik nem színészek! Azok is legyenek a listában, akiknek nincs funkciójuk!
+
+SELECT DISTINCT szemely.nev, feladat.megnevezes
+FROM szemely LEFT JOIN feladat ON szemely.id = feladat.szemelyid
+WHERE feladat.megnevezes != "színész" OR feladat.megnevezes IS null
+
+7.	Az egyes filmekben funkciónként hány ember dolgozott? (hány színész, hány operatőr, stb.)
+
+SELECT film.cim, feladat.megnevezes, COUNT(*) AS fo
+FROM film INNER JOIN feladat ON film.id = feladat.filmid
+GROUP BY film.cim, feladat.megnevezes;
+
+8.	Milyen funkciókat töltenek be az egyes filmeknél? Olyan filmek is szerepeljenek a listában, amelyekhez esetleg még nem tartozik funkció. Minden filmcím esetén csak egyszer jelenjen meg egy funkció.
+
+SELECT DISTINCT film.cim, feladat.megnevezes
+FROM film LEFT JOIN feladat ON film.id = feladat.filmid;	
+
+9.	Mely filmekhez nincs rendező hozzárendelve?
+
+SELECT cim
+FROM film
+WHERE cim NOT IN (
+    SELECT film.cim
+	FROM film INNER JOIN feladat ON film.id = feladat.filmid
+	WHERE feladat.megnevezes = "rendező"
+);

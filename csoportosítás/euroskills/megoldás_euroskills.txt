@@ -1,0 +1,64 @@
+1. Az ünnepélyes eredményhirdetésen számos arany-, ezüst- és bronzérmet osztottak ki. Azoknak, akik lemaradtak a dobogóról, de legalább 700 pontot kaptak, „kiválósági érem” lett a jutalma! (Tudjuk, hogy egyik dobogós sem kapott 700 pontnál kevesebbet.)
+Lekérdezéssel határozza meg, hogy hány érmet osztottak ki! A számított mező címkéjét a minta szerint állítsa be!
+
+SELECT COUNT(*) as ermek
+FROM versenyzo
+WHERE pont >= 700;
+
+2. Az orszag táblában szereplő nemzetek közül nem mindegyik vett részt a budapesti versenyen. Lekérdezéssel jelenítse meg ismétlődések nélkül azoknak az országoknak a nevét ábécé rendben, melyek indítottak versenyzőt a 2018-as EuroSkillsen!
+
+SELECT DISTINCT orszag.orszagNev
+FROM versenyzo INNER JOIN orszag ON orszag.id = versenyzo.orszagId
+ORDER BY orszag.orszagNev;
+
+3. Hány versenyző vett részt a megmérettetésen az egyes szakmákban? Lekérdezéssel jelenítse meg a szakmák megnevezését és a részt vevő versenyzők számát úgy, hogy a legnépesebb szakmával kezdődjön a lista! A számított mező címkéjét a minta szerint állítsa be!
+
+SELECT szakma.szakmaNev, COUNT(*) AS versenyzok_szama
+FROM versenyzo INNER JOIN szakma ON szakma.id = versenyzo.szakmaId
+GROUP BY szakma.szakmaNev
+ORDER BY versenyzok_szama DESC;
+
+4. Lekérdezéssel készítse el a versenyzők összesített eredménylistáját! A lekérdezés a versenyzők nevét, országának nevét, szakmájának nevét és az elért pontszámot tartalmazza! Az eredményt rendezze a minta alapján pontszám szerint csökkenően! Azonos pontszám esetén ábécé rendben jelenjenek meg a versenyzők nevei! A lekérdezés által megjelenített sorokat korlátozza a legjobb 25 eredményre!
+
+SELECT versenyzo.nev, orszag.orszagNev, szakma.szakmaNev, versenyzo.pont
+FROM versenyzo INNER JOIN szakma ON szakma.id = versenyzo.szakmaId
+INNER JOIN orszag ON orszag.id = versenyzo.orszagId
+ORDER BY versenyzo.pont DESC, versenyzo.nev LIMIT 25;
+
+5. Készítsünk egy olyan kimutatást, amelyben minden országban és azon belül a szakmákban megjelenik az átlag pontszám!
+
+SELECT orszag.orszagNev, szakma.szakmaNev, AVG(versenyzo.pont) AS atlagPont
+FROM versenyzo INNER JOIN szakma ON szakma.id = versenyzo.szakmaId
+INNER JOIN orszag ON orszag.id = versenyzo.orszagId
+GROUP BY orszag.orszagNev, szakma.szakmaNev
+
+6. Kik azok a versenyzők akik Litvániából és Lettországból érkeztek és webfejlesztő szakmában indultak?
+Hány pontot kaptak?
+
+SELECT versenyzo.nev, orszag.orszagNev, versenyzo.pont
+FROM versenyzo INNER JOIN szakma ON szakma.id = versenyzo.szakmaId
+INNER JOIN orszag ON orszag.id = versenyzo.orszagId
+WHERE orszag.orszagNev IN("Lettország", "Litvánia") AND szakma.szakmaNev = "webfejlesztő";
+
+7. Van-e olyan ország ahonnan a pék szakmában legfeljebb két tanuló indult?
+
+SELECT orszag.orszagNev, COUNT(versenyzo.id) AS fo
+FROM versenyzo INNER JOIN szakma ON szakma.id = versenyzo.szakmaId
+INNER JOIN orszag ON orszag.id = versenyzo.orszagId
+WHERE szakma.szakmaNev = "elektronikai technikus"
+GROUP BY orszag.orszagNev
+HAVING fo <= 2;
+
+Euroskill feladathoz kapcsolódva:
+
+1. Melyek azon az országok, ahonnan nem indult egyetlen versenyző sem?
+
+SELECT orszag.orszagNev
+FROM versenyzo RIGHT JOIN orszag ON versenyzo.orszagId = orszag.id
+WHERE versenyzo.pont IS null;
+
+2. Van-e olyan szakma, amelyből nem indult versenyző? Nincs
+
+SELECT szakma.szakmaNev
+FROM versenyzo RIGHT JOIN szakma ON versenyzo.szakmaId = szakma.id
+WHERE szakma.id IS null;

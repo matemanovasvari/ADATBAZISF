@@ -1,0 +1,52 @@
+1.	Melyek azok a termékek, amelyek nevében szerepel a „tej” vagy a „túró” szó? A termék neve és ára legyen a listában ár szerint csökkenő sorrendben!
+
+
+
+2.	Melyek azok a termékek és mennyibe kerülnek, amelyekből már történt eladás? Egy termék neve csak egyszer szerepeljen!
+
+
+
+3.	Készítsen kimutatást, amely az eladott termékekből származó bevételt listázza termékenként!
+
+
+
+4.	Melyek azok a termékek, amelyből még nem adtak el egyetlen darabot sem? A termék neve mellett jelenjen meg az ára is!
+
+
+
+5.	A bolt tulajdonosa új termékkategóriákat is be szeretne vezetni, de még egyetlen árut sem töltöttek fel az új kategóriákhoz. Melyek az új kategóriák?
+
+
+
+6.	Termékkategóriánként hányféle terméket kínál az élelmiszerbolt? Azok a kategóriák is jelenjenek meg a listában, amelyekből még egy termék sem szerepel a kínálatban! Rendezze a listát úgy, hogy az a kategória legyen elöl, amelyből a legtöbb féle termék van a boltban!
+
+
+
+7.	Listázza az összes terméket és az eladott összmennyiséget! Azok a termékek is jelenjenek meg a listában, amelyből még nem történt eladás!
+
+
+
+8.	Készítsen kimutatást az összes termékről és az egyes eladási adatokról! A listában szerepeljen a kategórianév, terméknév, eladási dátum és a fizetett összeg eladásonként! Minden termék szerepeljen a listában!
+
+
+
+9.	Készítsen havi kimutatást az eladott termékek mennyiségéről! A listában az évszám, hónapszám és az adott hónapban összesen eladott termékszám jelenjen meg!
+
+
+
+10.	Melyek azok a tejtermékek, amelyek az átlagos tejtermékárnál olcsóbbak? A termék neve és ára jelenjen meg ár szerint rendezve!
+
+
+
+11.	Van-e olyan termék, amelyből 2022. májusában és júniusában is adtak el?
+
+
+
+
+
+
+
+
+
+
+

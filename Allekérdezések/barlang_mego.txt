@@ -1,0 +1,27 @@
+--1.	Melyik a leghosszabb barlang? Írassa ki a barlang nevét és hosszát méterben!
+
+SELECT nev, hossz
+FROM barlang
+ORDER BY hossz DESC LIMIT 1
+
+--or
+
+SELECT nev, hossz
+FROM barlang
+WHERE hossz = (SELECT MAX(hossz) FROM barlang);
+
+-- 2.	Listázza ki a „Fecske-lyuk” barlang településén található többi barlang nevét és kiterjedését!
+
+
+
+-- 3.	Melyek azok a barlangok és mely településen találhatóak, amelyek mélysége az átlagos mélységet meghaladja?
+
+
+
+-- 4.	Melyek azok a Bódvaszilas településhez tartozó barlangok, amelyek az átlagos hosszúságnál rövidebbek?
+
+
+
+-- 5.	A budapesti barlangok közül melyik a legmélyebb?
+-- 6.	Melyik a legrövidebb barlang? Melyik településen található?
+-- 7.	Melyek a „Pisznice-barlang” településén lévő barlangok? Listázza a barlangok nevét, magasságát és mélységét úgy, hogy a „Pisznice-barlang” már nem jelenjen meg!
