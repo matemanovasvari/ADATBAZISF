@@ -1,0 +1,39 @@
+1. Hozzon létre a lokális SQL szerveren fejlesztokozpont néven adatbázist! Az adatbázis alapértelmezett rendezési sorrendje a magyar szabályok szerint legyen! Állítsa be az UTF-8 kódolást alapértelmezettnek az adatbázis létrehozásánál!
+
+CREATE DATABASE fejlesztokozpont CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+
+3. Írja ki, hogy összesen hány gyermek lakik Budapesten! A mező neve „Budapestiek száma” legyen!
+
+SELECT COUNT(*) AS Budapestiek_szama
+FROM gyermek
+WHERE telepules = "Budapest"
+
+4. Szeretnénk tudni, hogy mely napokon és milyen leírással voltak „programozás” megnevezésű foglalkozások. Jelenítse meg az ilyen megnevezésű foglalkozásokat az adatbázisból! A lekérdezés csak a datum és a leiras oszlopokat jelenítse meg!
+
+SELECT foglalkozas.datum, temakor.leiras
+FROM temakor INNER JOIN foglalkozas ON temakor.id = foglalkozas.temakorId
+WHERE temakor.megnevezes = "programozás";
+
+5. Fehér Tamással újra foglalkozott Vass Virág fejlesztő 2022-12-15-én 16:00 órai kezdettel logika témakörben. Szúrjon be egy új rekordot a foglalkozas táblába úgy, hogy a gyermek, fejlesztő és témakör azonosítóját a megfelelő táblából lekérdezéssel keresse ki!
+
+
+
+6. A fejlesztők többféle megnevezésű egyéni foglalkozást is tartanak. Írja ki, hogy melyik volt az a 3 foglalkozás, amin a legtöbb gyermek részt vett! Írja ki a foglalkozást tartó nevét, a foglalkozás megnevezését, illetve a számított mezőt, melynek neve „gyermekszám” legyen! Feltételezheti, hogy a 3. és 4. helyen nem alakult ki holtverseny.
+
+
+
+7. Adja meg, hogy kik voltak azok a fejlesztők, akik nem tartottak foglalkozást a tárolt időszakban! Eredményként csak a fejlesztők neve és a szakmájuk jelenjen meg!
+
+
+
+8. A foglalkozások óránként 3000 Ft-ba kerülnek. Figyelembe véve, hogy minden foglalkozás 1 órás, adja meg, hogy melyik szülőnek mennyit kellett fizetnie a tárolt időszakban! Csak a szülők neve és a fizetendő ár jelenjen meg, utóbbi neve „fizetendő_ár” legyen!
+
+
+
+9. Kiss Bálint tanulóval csak egy fejlesztő pedagógus foglalkozik. Kikkel foglalkozik még ez a fejlesztő pedagógus Kiss Bálinton kívül? Minden név csak egyszer szerepeljen!
+
+
+
+10. Hány gyermekkel foglalkozik egy fejlesztő pedagógus? Azok a pedagógusok is jelenjenek meg, akik még nem foglalkoznak egy tanulóval sem! Rendezze a listát úgy, hogy az a tanár legyen elöl, aki a legtöbb tanulóval foglalkozik. Ügyeljen arra, hogy egy tanulónak több foglalkozása is rögzítve van ugyanazzal a tanárral a foglalkozas táblában!
+
+

@@ -1,0 +1,66 @@
+-- 2.
+
+SELECT tag.nev
+FROM tag
+WHERE tag.elhunyt = 0
+ORDER BY tag.nev;
+
+-- 3.
+
+SELECT tag.nev, tag.identitas, tagsag.tipus,  tagsag.ev
+FROM tag INNER JOIN tagsag ON tag.id = tagsag.tagid
+WHERE (tagsag.tipus = "r" OR tagsag.tipus = "l")
+AND tag.identitas != ""
+ORDER BY tagsag.ev;
+
+-- 4. 
+
+SELECT tag.nev,  MIN(tagsag.ev) AS eloszorValasztottak
+FROM tag INNER JOIN tagsag ON tag.id = tagsag.tagid
+GROUP BY tag.id;
+
+-- 5.
+
+SELECT DISTINCT (SELECT COUNT(*) FROM tag WHERE nem = "n") / (SELECT COUNT(*) FROM tag) AS nokAranya
+FROM tag;
+
+-- 6.
+
+SELECT AVG(rt.ev - lt.ev)
+FROM tagsag AS rt INNER JOIN tagsag AS lt ON rt.tagid = lt.tagid 
+WHERE rt.tipus = "r" AND lt.tipus = "l"
+
+-- 7.
+
+SELECT nev, ev, elhunyt 
+FROM tag, tagsag
+WHERE tag.id = tagid
+AND ev <= (SELECT tagsag.ev FROM tag INNER JOIN tagsag ON tag.id = tagsag.tagid WHERE tag.nev = "Teller Ede" AND tagsag.tipus = "t")
+AND (elhunyt >= (SELECT tag.elhunyt FROM tag WHERE tag.nev = "Teller Ede") OR tag.elhunyt = 0)
+AND tipus = "t";
+
+--8.
+
+SELECT tag.nev, tagsag.ev
+FROM tagsag INNER JOIN tag ON tagsag.tagid = tag.id
+ORDER BY tag.nev;
+-- A lekérdezés 0,0222 másodpercig tartott.
+
+-- kapcsolat nélkül (Decartes-szorzat képződik):
+SELECT tag.nev, tagsag.ev
+FROM tagsag, tag
+ORDER BY tag.nev;
+-- A lekérdezés 32,8703 másodpercig tartott.
+
+--9.
+
+SELECT tag.nev, tag.szuletett, tag.elhunyt, tagsag.ev, tagsag.tipus
+FROM tagsag INNER JOIN tag ON tag.id = tagsag.tagid
+WHERE tag.nev = "Orsós Ferenc";
+-- 
+
+ALTER TABLE tag ADD INDEX nevidx(nev);
+
+SELECT tag.nev, tag.szuletett, tag.elhunyt, tagsag.ev, tagsag.tipus
+FROM tagsag INNER JOIN tag ON tag.id = tagsag.tagid
+WHERE tag.nev = "Orsós Ferenc";
